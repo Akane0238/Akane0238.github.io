@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-01 21:01:49'
+  postUpdate: '2024-08-02 10:28:21'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -155,28 +155,48 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="镜花水月" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://wallpaperaccess.com/full/10796414.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="镜花水月"><span class="site-name">镜花水月</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">镜花水月</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></span></div><div class="content">随机事件及概率
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://wallpaperaccess.com/full/10796414.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="镜花水月"><span class="site-name">镜花水月</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">镜花水月</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/01/CMake%E6%95%99%E7%A8%8B/" title="CMake教程">CMake教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-01T13:07:28.068Z" title="发表于 2024-08-01 21:07:28">2024-08-01</time></span></div><div class="content"> CMake 链接
+CMake 教程转载
+ 为什么会接触到 CMake
+为了开始 CS144 的 lab，我前置除了需要学习 C外，还需要配置好实验的环境，而环境又分为 C的环境和官方给的项目环境，于是…
+没错，lab 还没有难到我的时候，环境的配置便给了我当头一棒。除了 C基本的编译工具 gcc/g要安装了解外，还需要 clone 官方的 start code。一开始打算做最新的Minnow版本，但官方对 g++和 Ubuntu 的版本要求太高了，我的 WSL 只是 22.04，完全没达到实验的标准，因此在 cmake 的时候不出所料地遇到了问题 TAT
+
+由于不想继续折腾系统版本，于是我又去翻到了Sponge版的 start code，继续 cmake，这次终于是没问题了，不过后面 make 进行编译时又又出现了问题
+
+原来是libsponge/util/adress.cc没有加上头文件&lt;array&gt;，加上后最终编译成功！至此，终于可以开始愉快的实验了，…吗？
+之所以环境的构建如此坎坷，我觉得最主要的原因是这些工具我完全不了解，所以遇到问题只能上网搜，然后按图索骥地尝试 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></span></div><div class="content"> 随机事件及概率
 
 条件概率——全概率公式+贝叶斯公式
-古典概型 ## 一维随机变量（离散型＋连续型）
+古典概型
+
+ 一维随机变量（离散型＋连续型）
+
 离散型随机变量分布律/连续型随机变量概率密度
 
-概率密度\(f(x)\)
+概率密度f(x)f(x)f(x)
 
 分布函数&lt;——&gt; 概率密度的互推
-重难点（步骤）：求连续型变量\(X\)的函数\(Y(X)\)的分布函数和概率密度 ##
-二维随机变量（离散型+连布续型）
+重难点（步骤）：求连续型变量XXX的函数Y(X)Y(X)Y(X)的分布函数和概率密度
 
+
+
+
+
+ 二维随机变量（离散型+连布续型）
 
 离散型随机变量联合分/边缘分布/条件分布（分布律）
 连续型随机变量联合分布/边缘分布/条件分布（概率密度）
 
-最难点：两个连续型随机变量的函数的分布 \(Z=X+Y\)、\(Z=XY\)、\(Z=\frac{X}{Y}\)、\(Z=\max\{X,Y\}...\)
-独立性 ## 随机变量的数字特征
+最难点：两个连续型随机变量的函数的分布 Z=X+YZ=X+YZ=X+Y、Z=XYZ=XYZ=XY、Z=XYZ=\frac{X}{Y}Z=YX​、Z=max⁡{X,Y}...Z=\max\{X,Y\}...Z=max{X,Y}...
+独立性
 
-数学期望\(E(X)\)
 
-离散型/连续型\(E(X)\)公式
+
+ 随机变量的数字特征
+
+数学期望E(X)E(X)E(X)
+
+离散型/连续型E(X)E(X)E(X)公式
 随机变量的函数的数学期望
 
 离散/连续
@@ -184,73 +204,85 @@
 期望的性质
 
 
-方差\(D(X)\)
 
-\(D(X)与E(X)\)的关系式
-标准化变量\(X^*
-=\frac{X-\mu}\sigma{}\) ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/24/%E5%85%B3%E4%BA%8E%E3%80%8A%E5%BC%A0%E5%B1%85%E6%AD%A3%20%20%E7%AC%AC%E4%BA%8C%E5%8D%B7%EF%BC%9A%E6%B0%B4%E9%BE%99%E5%90%9F%E3%80%8B%E7%9A%84%E9%A2%98%E7%9B%AE%E5%90%AB%E4%B9%89/" title="关于《张居正  第二卷：水龙吟》的题目含义">关于《张居正  第二卷：水龙吟》的题目含义</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-23T16:44:05.710Z" title="发表于 2024-06-24 00:44:05">2024-06-24</time></span></div><div class="content">读罢《张居正》的第二卷，我发现这一卷的书名并没有很明确地在书中进行解析。第一卷所题“木兰歌”确是在卷末由玉娘为饯别高拱而在筵席上所弹唱的曲子《木兰歌》所提到，这首词精炼地概括了整卷书的内容，即张居正高拱两个大权力集团间的斗争。
-&gt;世上事一半儿荒唐一半儿险恶， 皇城中尔虞我诈，衙门内铁马金戈。
-羽扇纶巾，说是些大儒大雅， 却为何我揪着你，你撕着我，
-制陷阱、使绊子，一个比一个更利索。 呜呼！今日里拳头上跑马抖威风，
-到明日败走麦城， 只落得形影相吊英雄泪滂沱。 只可叹，荣辱兴衰转瞬间。
-天涯孤旅，古道悲风， 都在唱那一个字： 错！错！！错！！！ ——《张居正
-第一卷：木兰歌》
-第二卷书围绕“胡椒苏木折俸”一事展开，讲述的是张居正当上首辅而进行“京察”改革以及过程中遇到的许多阻力（高拱门人捣乱、与李太后冯保等人的权力制衡......）。关于第二卷名《水龙吟》，我在读之前便在想作者要以一种什么手法来带出这个名字，遗憾的是读完也没能理解这三个字（我的文学水平太低了...）。首先我对这个词牌名不太了解，只读过几首这个词牌的词，一般每个词牌名都会有它名字的来源。
-&gt;据说 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/05/Git%E5%AE%9E%E6%93%8D/" title="Git实操">Git实操</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-05T13:53:10.140Z" title="发表于 2024-06-05 21:53:10">2024-06-05</time></span></div><div class="content">什么是Git
+
+方差D(X)D(X)D(X)
+
+D(X)与E(X)D(X)与E(X)D(X)与 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/24/%E5%85%B3%E4%BA%8E%E3%80%8A%E5%BC%A0%E5%B1%85%E6%AD%A3%20%20%E7%AC%AC%E4%BA%8C%E5%8D%B7%EF%BC%9A%E6%B0%B4%E9%BE%99%E5%90%9F%E3%80%8B%E7%9A%84%E9%A2%98%E7%9B%AE%E5%90%AB%E4%B9%89/" title="关于《张居正  第二卷：水龙吟》的题目含义">关于《张居正  第二卷：水龙吟》的题目含义</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-23T16:44:05.710Z" title="发表于 2024-06-24 00:44:05">2024-06-24</time></span></div><div class="content">读罢《张居正》的第二卷，我发现这一卷的书名并没有很明确地在书中进行解析。第一卷所题“木兰歌”确是在卷末由玉娘为饯别高拱而在筵席上所弹唱的曲子《木兰歌》所提到，这首词精炼地概括了整卷书的内容，即张居正高拱两个大权力集团间的斗争。
+
+世上事一半儿荒唐一半儿险恶，
+皇城中尔虞我诈，衙门内铁马金戈。
+羽扇纶巾，说是些大儒大雅，
+却为何我揪着你，你撕着我，
+制陷阱、使绊子，一个比一个更利索。
+呜呼！今日里拳头上跑马抖威风，
+到明日败走麦城，
+只落得形影相吊英雄泪滂沱。
+只可叹，荣辱兴衰转瞬间。
+天涯孤旅，古道悲风，
+都在唱那一个字：
+错！错！！错！！！    ——《张居正 第一卷：木兰歌》
+
+第二卷书围绕“胡椒苏木折俸”一事展开，讲述的是张居正当上首辅而进行“京察”改革以及过程中遇到的许多阻力（高拱门人捣乱、与李太后冯保等人的权力制衡…）。关于第二卷名《水龙吟》，我在读之前便在想作者要以一种什么手法来带出这个名字，遗憾的是读完也没能理解这三个字（我的文学水平太低了…）。首先我对这个词牌名不太了解，只读过几首这个词牌的词，一般每个词牌名都会有它名字的来源。
+
+据说，“水龙吟”最早是南北朝时北齐的一 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/05/Git%E5%AE%9E%E6%93%8D/" title="Git实操">Git实操</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-05T13:53:10.140Z" title="发表于 2024-06-05 21:53:10">2024-06-05</time></span></div><div class="content"> 什么是Git
 
 Git是一个开源的分布式版本控制系统
 
-当然，除了Git以外还有其他版本管理系统，如 CVS、Subversion 或
-Perforce。但他们对数据信息的存储方式上有差别。 +
-以文件变更列表的方式存储信息（存储每个文件与初始版本的差异）
- +
-把数据看作是对小型文件系统的一系列快照（snapshot）（ 存储项目随时间改变的快照）
+当然，除了Git以外还有其他版本管理系统，如 CVS、Subversion 或 Perforce。但他们对数据信息的存储方式上有差别。
+
+以文件变更列表的方式存储信息（存储每个文件与初始版本的差异） 
+
+把数据看作是对小型文件系统的一系列快照（snapshot）（ 存储项目随时间改变的快照）  
+
 
 .git 文件夹是Git版本库的核心，它使得Git能够追踪文件的更改、管理分支、记录提交历史等。这个文件夹通常位于项目的根目录下。（隐藏）
 有端联想操作系统中基于inode表的文件系统也利用这个技术，把inode表拷贝一份作为快照（系统还原点？）保存下来，这样子可以进行回退，实现基于快照的写时拷贝
-Git的四个工作区及状态
+ Git的四个工作区及状态
 
-工作区（Work
-Space）：未追踪（unstage/untracked）
+工作区（Work Space）：未追踪（unstage/untracked）
 暂存区（Staging area）：已追踪（stage）
 本地仓库（Local Repository）
-远程仓库 （Remote Repository） 
+远程仓库 （Remote Repository）
 
-Git工作流实操
-开发时，我们可以有两 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/%E5%BE%B7%E6%B3%95%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" title="读《庄子》">读《庄子》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T12:18:09.440Z" title="发表于 2024-05-26 20:18:09">2024-05-26</time></span></div><div class="content">#
 
-古代哲学思想与现代科学理论的联系——论自然科学视角下庄子之“道”
+ Git工作流实操
+开发时，我们可以有两种方式开始：
 
-摘要：
+先在远端（以Git ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/%E5%BE%B7%E6%B3%95%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" title="读《庄子》">读《庄子》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T12:18:09.440Z" title="发表于 2024-05-26 20:18:09">2024-05-26</time></span></div><div class="content"> 古代哲学思想与现代科学理论的联系——论自然科学视角下庄子之“道”
+ 摘要：
 由《庄子》首篇《逍遥游》中的蜩鸠之笑与小大之辩，联想到对时空维度的讨论，引发对哲学与科学二者关系的思考。我们能否以自然科学的思想来解释哲学呢？为了解决问题，探讨自然辩证法在学习古代哲学思想上的应用。自然辩证法揭示了自然科学发展的内在逻辑、人对自然界的能动关系等，它不但把科学看作是一种独立的社会现象,探讨其在一定社会中发展和发挥作用的规律，而且也把与科学紧密相关的技术作为一种独立的社会现象来研究。剖析庄子思想的两个组成部分——道论和德论，我们以现代视角来认知庄子道家思想。
-关键词：自然辩证法、科学技术、庄子哲学
-一、从《逍遥游》看时空维度
+ 关键词：自然辩证法、科学技术、庄子哲学
+ 一、从《逍遥游》看时空维度
 
-蜩与学鸠笑之曰：“我决起而飞，抢榆枋而止，时则不至，而控于地而已矣，奚以之九万里而南为？”适莽苍者，三餐而反，腹犹果然；适百里者，宿舂粮；适千里者，三月聚粮。之二虫又何知！小知不及大知，小年不及大年。
-奚以知其然也？朝菌不知晦朔，蟪蛄不知春秋，此小年也。楚之南有冥灵者，以五百岁为春，五百岁为秋；上古有大椿者，以八千岁为春，八千岁为秋。此大年也。而彭祖 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/20/Go%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" title="Go语法笔记">Go语法笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-20T11:46:01.980Z" title="发表于 2024-05-20 19:46:01">2024-05-20</time></span></div><div class="content">基本数据类型
+蜩与学鸠笑之曰：“我决起而飞，抢榆枋而止，时则不至，而控于地而已矣，奚以之九万里而南为？”适莽苍者，三餐而反，腹犹果然；适百里者，宿舂粮；适千里者，三月聚粮。之二虫又何知！小知不及大知，小年不及大年。 奚以知其然也？朝菌不知晦朔，蟪蛄不知春秋，此小年也。楚之南有冥灵者，以五百岁为春，五百岁为秋；上古有大椿者，以八千岁为春，八千岁为秋。此大年也。而彭祖乃今以久特闻，众人匹 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/20/Go%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" title="Go语法笔记">Go语法笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-20T11:46:01.980Z" title="发表于 2024-05-20 19:46:01">2024-05-20</time></span></div><div class="content"> 基本数据类型
 
 变量的声明：常量（const） 变量（var） 类型（type）
 类型转换：需要显式的强制类型转换（不同于C，表现为强类型语言）
-1var m float64 = float64(i)
-String：和 C/C++ 不一样，Go 中的字符串是根据长度限定，而非特殊字符
-\0
-自增/自减运算符：++ 和 --
-的只能作为语句，而非表达式 (不同与C！)
-12//错误示例val = arr[i++]
 
-控制结构
-1. if-else
+1var m float64 = float64(i)
+
+String：和 C/C++ 不一样，Go 中的字符串是根据长度限定，而非特殊字符 \0
+自增/自减运算符：++ 和 – 的只能作为语句，而非表达式 (不同与C！)
+
+12//错误示例val = arr[i++]
+ 控制结构
+ 1. if-else
 
 Go看起来不使用分号作为语句的结束，但实际上这一过程是由编译器自动完成
 
-2. switch
+ 2. switch
 
 switch 从上往下执行case语句直到匹配成功
-多重条件判断使用switch true{case: ... case:
-...}形式
+多重条件判断使用switch true{case: … case: …}形式
 
-3. for
+ 3. for
 
 Go中的循环体只有for一种
-for后直接加上条件判断成为C中的while 1234for index &lt; 8&#123;	//循环	index++&#125;
-for-range遍历 12345678for index , value  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">言游彼冬</div><div class="author-info__description">随缘更各种杂七杂八的东西</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/24/%E5%85%B3%E4%BA%8E%E3%80%8A%E5%BC%A0%E5%B1%85%E6%AD%A3%20%20%E7%AC%AC%E4%BA%8C%E5%8D%B7%EF%BC%9A%E6%B0%B4%E9%BE%99%E5%90%9F%E3%80%8B%E7%9A%84%E9%A2%98%E7%9B%AE%E5%90%AB%E4%B9%89/" title="关于《张居正  第二卷：水龙吟》的题目含义">关于《张居正  第二卷：水龙吟》的题目含义</a><time datetime="2024-06-23T16:44:05.710Z" title="发表于 2024-06-24 00:44:05">2024-06-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/05/Git%E5%AE%9E%E6%93%8D/" title="Git实操">Git实操</a><time datetime="2024-06-05T13:53:10.140Z" title="发表于 2024-06-05 21:53:10">2024-06-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/26/%E5%BE%B7%E6%B3%95%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" title="读《庄子》">读《庄子》</a><time datetime="2024-05-26T12:18:09.440Z" title="发表于 2024-05-26 20:18:09">2024-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/20/Go%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/" title="Go语法笔记">Go语法笔记</a><time datetime="2024-05-20T11:46:01.980Z" title="发表于 2024-05-20 19:46:01">2024-05-20</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">2</span></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>
+for后直接加上条件判断成为C中的while
+
+1234for index &lt; 8&#123;	//循环	index++&#125;
+
+for-range遍历
+
+12345678for index , value := range slice1&#123; ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">言游彼冬</div><div class="author-info__description">随缘更各种杂七杂八的东西</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/01/CMake%E6%95%99%E7%A8%8B/" title="CMake教程">CMake教程</a><time datetime="2024-08-01T13:07:28.068Z" title="发表于 2024-08-01 21:07:28">2024-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/24/%E5%85%B3%E4%BA%8E%E3%80%8A%E5%BC%A0%E5%B1%85%E6%AD%A3%20%20%E7%AC%AC%E4%BA%8C%E5%8D%B7%EF%BC%9A%E6%B0%B4%E9%BE%99%E5%90%9F%E3%80%8B%E7%9A%84%E9%A2%98%E7%9B%AE%E5%90%AB%E4%B9%89/" title="关于《张居正  第二卷：水龙吟》的题目含义">关于《张居正  第二卷：水龙吟》的题目含义</a><time datetime="2024-06-23T16:44:05.710Z" title="发表于 2024-06-24 00:44:05">2024-06-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/05/Git%E5%AE%9E%E6%93%8D/" title="Git实操">Git实操</a><time datetime="2024-06-05T13:53:10.140Z" title="发表于 2024-06-05 21:53:10">2024-06-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/26/%E5%BE%B7%E6%B3%95%E8%AF%BB%E4%B9%A6%E6%8A%A5%E5%91%8A/" title="读《庄子》">读《庄子》</a><time datetime="2024-05-26T12:18:09.440Z" title="发表于 2024-05-26 20:18:09">2024-05-26</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">2</span></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>
