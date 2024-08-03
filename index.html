@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-02 14:27:28'
+  postUpdate: '2024-08-03 20:39:00'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -157,14 +157,13 @@
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="镜花水月" type="application/atom+xml">
 </head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://wallpaperaccess.com/full/10796414.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="镜花水月"><span class="site-name">镜花水月</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">镜花水月</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/01/CMake%E6%95%99%E7%A8%8B/" title="CMake教程">CMake教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-01T13:07:28.068Z" title="发表于 2024-08-01 21:07:28">2024-08-01</time></span></div><div class="content"> CMake 链接
 CMake 教程转载
+
+定义： CMake 是一个跨平台的构建系统生成工具。它用于配置和管理项目的构建过程，可以生成特定构建工具（如 Make 和 Ninja）所需要的构建文件（如 Makefile 或 build.ninja）。
+功能：CMake 提供了一个统一的接口（CMakeLists.txt 文件）来描述项目的构建逻辑，并根据目标平台生成相应的构建文件。CMake 支持多种编译器（不同语言）和构建工具（如 C++的 make 和 Ninja），能够处理复杂的依赖关系和跨平台兼容性问题。
+
  为什么会接触到 CMake
 为了开始 CS144 的 lab，我前置除了需要学习 C外，还需要配置好实验的环境，而环境又分为 C的环境和官方给的项目环境，于是…
-没错，lab 还没有难到我的时候，环境的配置便给了我当头一棒。除了 C基本的编译工具 gcc/g要安装了解外，还需要 clone 官方的 start code。一开始打算做最新的Minnow版本，但官方对 g++和 Ubuntu 的版本要求太高了，我的 WSL 只是 22.04，完全没达到实验的标准，因此在 cmake 的时候不出所料地遇到了问题 TAT
-
-由于不想继续折腾系统版本，于是我又去翻到了Sponge版的 start code，继续 cmake，这次终于是没问题了，不过后面 make 进行编译时又又出现了问题
-
-原来是libsponge/util/adress.cc没有加上头文件&lt;array&gt;，加上后最终编译成功！至此，终于可以开始愉快的实验了，…吗？
-之所以环境的构建如此坎坷，我觉得最主要的原因是这些工具我完全不了解，所以遇到问题只能上网搜，然后按图索骥地尝试 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></span></div><div class="content"> 随机事件及概率
+没错，lab 还没有难到我的时候，环境的配置便给了我当头一棒。除了 C基本的编译工具 gcc/g要安装了解外，还需要 clone 官方的 start code。一开始打算做最新的Minnow版本，但官方对 g++和 Ubuntu 的版本要求太高了，我的 WSL 只是 22.04，完全没达到实验的标准，因此在 cm ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/03/%E6%A6%82%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%80%83%E7%82%B9/" title="概统期末考点（LaTex试用）">概统期末考点（LaTex试用）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-03T11:23:38.060Z" title="发表于 2024-07-03 19:23:38">2024-07-03</time></span></div><div class="content"> 随机事件及概率
 
 条件概率——全概率公式+贝叶斯公式
 古典概型
