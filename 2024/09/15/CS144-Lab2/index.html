@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>镜花水月 | 镜花水月</title><meta name="author" content="蘋末风"><meta name="copyright" content="蘋末风"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="实验总览 官方文档对实验的描述如下：  In Lab 2, you will implement the TCPReceiver, the part of a TCP implementation that handles the incoming byte stream. The TCPReceiver translates between incoming TCP segments (the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="镜花水月">
+<meta property="og:url" content="http://example.com/2024/09/15/CS144-Lab2/index.html">
+<meta property="og:site_name" content="镜花水月">
+<meta property="og:description" content="实验总览 官方文档对实验的描述如下：  In Lab 2, you will implement the TCPReceiver, the part of a TCP implementation that handles the incoming byte stream. The TCPReceiver translates between incoming TCP segments (the">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2024-09-15T08:59:30.128Z">
+<meta property="article:modified_time" content="2024-09-25T08:40:35.710Z">
+<meta property="article:author" content="蘋末风">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/crown.png"><link rel="canonical" href="http://example.com/2024/09/15/CS144-Lab2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '镜花水月',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 16:40:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="镜花水月" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wallpaperaccess.com/full/8045532.png')"><nav id="nav"><span id="blog-info"><a href="/" title="镜花水月"><span class="site-name">镜花水月</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-15T08:59:30.128Z" title="发表于 2024-09-15 16:59:30">2024-09-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T08:40:35.710Z" title="更新于 2024-09-25 16:40:35">2024-09-25</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="实验总览"><a class="markdownIt-Anchor" href="#实验总览"></a> 实验总览</h1>
+<p>官方文档对实验的描述如下：</p>
+<blockquote>
+<p>In Lab 2, you will implement the <code>TCPReceiver</code>, the part of a TCP implementation that handles the incoming byte stream. The <code>TCPReceiver</code> translates between incoming TCP segments (the payloads of datagrams carried over the Internet) and the incoming byte stream.</p>
+<p>The <code>TCPReceiver</code> receives segments from the Internet (via the <code>segment received()</code>method) and turns them into calls to your StreamReassembler, which eventually writes to the incoming ByteStream. Applications read from this ByteStream, just as you did in Lab 0 by reading from the TCPSocket.</p>
+</blockquote>
+<p>在 Lab2 中，我们要完成 TCP 框架中的<code>TCPReceiver</code>组件（其中包括我们已经实现的<code>SreamAssembler</code>和<code>ByteStream</code>模块）。这个组件的功能有三：</p>
+<ol>
+<li>接受数据报分片<code>TCPSegement(the actual datagram payloads)</code>，并且将其数据报中的数据提取出来，输入到我们上个实验实现的<code>StreamAssembler</code>中。</li>
+<li>实现流量控制(<strong>flow control</strong>)，因此我们要不断向<code>TCPSender</code>报告滑动窗口(<strong>sliding window</strong>)大小。</li>
+<li>通过<code>segment</code>的序列号保障数据的可靠传输。</li>
+</ol>
+<h1 id="第一部分64-bits-与-32-bits-序列号间转换"><a class="markdownIt-Anchor" href="#第一部分64-bits-与-32-bits-序列号间转换"></a> 第一部分：64-bits 与 32-bits 序列号间转换</h1>
+<h2 id="为什么需要做转换"><a class="markdownIt-Anchor" href="#为什么需要做转换"></a> 为什么需要做转换</h2>
+<ol>
+<li>TCP 报文段的序列号(sequence number)字段的最大长度是 32 字节，而我们的逻辑数据流的每个字节序号(absolute sequence number)的最大长度是 64 字节，所以<code>sequence number</code>在达到最大<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{32}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>后会重新从<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>开始循环。</li>
+<li>为了安全考虑，在 TCP 连接的三次握手阶段，<code>receiver</code>会随机初始化序号<code>isn</code>(initial sequence number, 32-bits)， 而我们的逻辑流的第一个序号(64-bits)永远是 0。<br>
+下表来自文档，表示只包含&quot;cat&quot;三个字节的字节流：<img src="/2024/09/15/CS144-Lab2/seqno.png" alt="seqno"></li>
+</ol>
+<h2 id="转换的接口"><a class="markdownIt-Anchor" href="#转换的接口"></a> 转换的接口</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// convert absolute seqno(64-bits) to seqno(32-bits)</span></span><br><span class="line"><span class="function">WrappingInt32 <span class="title">wrap</span><span class="params">(<span class="type">uint64_t</span> n, WrappingInt32 isn)</span></span></span><br><span class="line"><span class="function"><span class="comment">// convert seqno(32-bits) to absolute seqno(64-bits)</span></span></span><br><span class="line"><span class="function"><span class="type">uint64_t</span> <span class="title">unwrap</span><span class="params">(WrappingInt32_n, WrappingInt32_isn, <span class="type">uint64_t</span> checkpoint)</span></span></span><br></pre></td></tr></table></figure>
+<p>实现时需要注意的是，<code>SYN</code>和<code>FIN</code>也是占据一个序列号的，虽然它们不是一个报文段也不是表示 payload 数据的字节，仅表示序列号的起始和结尾！具体的实现参考了<a target="_blank" rel="noopener" href="https://lrl52.top/998/cs144-lablab2/">CS144 Lab：Lab2 – LRL52 的博客</a>。</p>
+<h1 id="第二部分完善-tcp-receiver-的逻辑"><a class="markdownIt-Anchor" href="#第二部分完善-tcp-receiver-的逻辑"></a> 第二部分：完善 TCP receiver 的逻辑</h1>
+<p><img src="/2024/09/15/CS144-Lab2/evolution.png" alt="evolution"><br>
+如上图所示，<code>TCP receiver</code>有四种状态：</p>
+<ul>
+<li><code>LISTEN</code>：初始化<code>receiver</code>后还未与<code>sender</code>进行 three-way hand shake，相当与<code>client-server</code>模型中的<code>server</code>处于监听状态，监听来自<code>client</code>的连接请求。此时<code>SYN</code>初始化序列号还未确定，所以无法进行接发包。</li>
+<li><code>SYN_RECV</code>：处于数据交换阶段，还未接受到包含<code>FIN</code>字段的数据包，因此连接持续。</li>
+<li><code>FIN_RECV</code>：接受到<code>FIN</code>的数据包，而且通过重组已经输入到<code>ByteStream</code>中，数据传输已经完成，不再接受数据报。</li>
+<li><code>ERROR</code>： 错误状态。</li>
+</ul>
+<h2 id="测试结果"><a class="markdownIt-Anchor" href="#测试结果"></a> 测试结果</h2>
+<p><img src="/2024/09/15/CS144-Lab2/test.png" alt="test"></p>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
+<p>实验的第一部分涉及绝对序号 (64-bits)和流序号 (32-bits)之间的转换，需要注意的细节还是很多的。第二部分我花了很多时间精力去看<code>tcp_header</code>和<code>tcp_segment</code>的接口，搞的很迷糊，最后还是没忍住去参考了网上的实现，发现基本上就没有用到。。我觉得还是自己在这方面的理论没有巩固得特别好，所以这个实验从头到尾都做地磕磕绊绊。<br>
+<img src="/2024/09/15/CS144-Lab2/%E6%A1%86%E6%9E%B6.png" alt="框架"><br>
+回到 TCP 结构图中看这个实验，我们实现了<code>TCPReceiever</code>，它将接受从<code>Sender</code>传来的 TCP 报文段，从中提取负载的报文并输入到之前实现的<code>Reassembler</code>中。为了实现流量控制，我们还计算了当前滑动窗口的大小，但是并没有报告给<code>Sender</code>，这会在下一个实验实现。</p>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/11/CS144-Lab1/" title="Standford CS144 Lab 1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Standford CS144 Lab 1</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">蘋末风</div><div class="author-info__description">随缘更各种杂七杂八的东西</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%80%BB%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text"> 实验总览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%8664-bits-%E4%B8%8E-32-bits-%E5%BA%8F%E5%88%97%E5%8F%B7%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text"> 第一部分：64-bits 与 32-bits 序列号间转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%81%9A%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text"> 为什么需要做转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.2.</span> <span class="toc-text"> 转换的接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E5%AE%8C%E5%96%84-tcp-receiver-%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text"> 第二部分：完善 TCP receiver 的逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-number">3.1.</span> <span class="toc-text"> 测试结果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text"> 总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/15/CS144-Lab2/" title="无题">无题</a><time datetime="2024-09-15T08:59:30.128Z" title="发表于 2024-09-15 16:59:30">2024-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/CS144-Lab1/" title="Standford CS144 Lab 1">Standford CS144 Lab 1</a><time datetime="2024-08-11T00:47:37.184Z" title="发表于 2024-08-11 08:47:37">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/08/%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%8F%91%E5%B1%95/" title="手机电话和微信语音——从两种即时通信技术的区别看通信网络的发展">手机电话和微信语音——从两种即时通信技术的区别看通信网络的发展</a><time datetime="2024-08-08T07:58:41.419Z" title="发表于 2024-08-08 15:58:41">2024-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/01/CMake%E6%95%99%E7%A8%8B/" title="CMake教程">CMake教程</a><time datetime="2024-08-01T13:07:28.068Z" title="发表于 2024-08-01 21:07:28">2024-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/18/CS144-lab0/" title="Standford CS144 Lab 0">Standford CS144 Lab 0</a><time datetime="2024-07-18T02:47:21.980Z" title="发表于 2024-07-18 10:47:21">2024-07-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div></div></body></html>

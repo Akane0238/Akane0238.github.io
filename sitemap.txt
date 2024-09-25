@@ -1,3 +1,4 @@
+http://example.com/2024/09/15/CS144-Lab2/
 http://example.com/2024/08/11/CS144-Lab1/
 http://example.com/2024/08/01/CMake%E6%95%99%E7%A8%8B/
 http://example.com/2024/07/18/CS144-lab0/
