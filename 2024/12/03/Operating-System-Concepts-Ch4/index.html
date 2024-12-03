@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Operating System Concepts: Multithreaded Programming | Tech_Islet</title><meta name="author" content="蘋末风"><meta name="copyright" content="蘋末风"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Key objectives  Introduce the notion of a thread Explicit threading - APIs for thread libraries Implicit threading - kernel level thread management Examine issues related to mutithreaded programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Operating System Concepts: Multithreaded Programming">
+<meta property="og:url" content="http://example.com/2024/12/03/Operating-System-Concepts-Ch4/index.html">
+<meta property="og:site_name" content="Tech_Islet">
+<meta property="og:description" content="Key objectives  Introduce the notion of a thread Explicit threading - APIs for thread libraries Implicit threading - kernel level thread management Examine issues related to mutithreaded programming">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2024-12-03T09:12:32.577Z">
+<meta property="article:modified_time" content="2024-12-03T09:16:56.146Z">
+<meta property="article:author" content="蘋末风">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="../../../../img/crown.png"><link rel="canonical" href="http://example.com/2024/12/03/Operating-System-Concepts-Ch4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="../../../../css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Operating System Concepts: Multithreaded Programming',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-03 17:16:56'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="Tech_Islet" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="../../../../img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="../../../../archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="../../../../tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="../../../../categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wallpaperaccess.com/full/8045532.png')"><nav id="nav"><span id="blog-info"><a href="../../../../index.html" title="Tech_Islet"><span class="site-name">Tech_Islet</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Operating System Concepts: Multithreaded Programming</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-03T09:12:32.577Z" title="发表于 2024-12-03 17:12:32">2024-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-03T09:16:56.146Z" title="更新于 2024-12-03 17:16:56">2024-12-03</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="key-objectives"><a class="markdownIt-Anchor" href="#key-objectives"></a> Key objectives</h1>
+<ul>
+<li>Introduce the notion of a thread</li>
+<li>Explicit threading - APIs for thread libraries</li>
+<li>Implicit threading - kernel level thread management</li>
+<li>Examine issues related to mutithreaded programming</li>
+</ul>
+<h1 id="thread-concept"><a class="markdownIt-Anchor" href="#thread-concept"></a> Thread Concept</h1>
+<p>A thread is a basic unit of CPU utilization, in other word, a fundamental unit of CPU execution. It comprises of:</p>
+<ul>
+<li><strong>a thread ID, TID</strong></li>
+<li><strong>a program counter</strong></li>
+<li><strong>a register set</strong></li>
+<li><strong>a stack</strong><br>
+And it shares with other threads belonging to the <em>same process</em>:</li>
+<li><strong>code</strong> section</li>
+<li><strong>data</strong> section</li>
+<li><strong>operating-system resources</strong> + open files (and other memory management information) + signals (ps: signal handlers are in shared code section)<br>
+A thread can also be viewed as a flow of control. A traditional process has a single thread of control.</li>
+</ul>
+<p>Since each thread executes independently, each thread has its own understanding of the stack and of the registers.<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/layout.png" alt="layout.png"><br>
+The bad part is that unlike the protection that exists among processes, the operating system can not prevent threads from interfering with each other – they share the same process space.</p>
+<h2 id="motivation"><a class="markdownIt-Anchor" href="#motivation"></a> Motivation</h2>
+<p>The first question merges in mind is that - why we need to introduce the concept of <strong>thread</strong>?</p>
+<p>A process may have some independent parts of execution which can be executed asynchronically. Take Web browser as an example, it might have one thread displaying images or text (renderer) while another thread retrieves data from network (across NIC), these are relatively different work and need few communication, which can be seen as <em>independent</em>.</p>
+<p>A process might have to handle some duplicate requests. Think about a Web server, it may perform several similar tasks, such as accepting client request for web pages, images or videos. If the web server program runs as a traditional single-threaded process, it can serve only one client at any point since concurrency is not true <em>parellelism</em>! One solution to the problem is to create a separate new process to serve every client. But that’s huge resource consumption because creating a new process is time-consuming and resource-intensive (and we terminate it when task finishes), and it’s in low resource utilization because the process just performs the same tasks as the original process (say, search data in DB and return it to client).</p>
+<p>So in this cirsumstance, why not just create a more lightweight process - thread?<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/server.png" alt="server.png"></p>
+<h2 id="benefits"><a class="markdownIt-Anchor" href="#benefits"></a> Benefits</h2>
+<ul>
+<li><strong>Responsiveness:</strong> allowing program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasing reponsiveness to the user</li>
+<li><strong>Resource sharing:</strong> sharing the memory and resources of the process to which they belong to, which allows an aplication to have several threads of activity within the same address space</li>
+<li><strong>Economy:</strong> more economical to create and context-switch threads</li>
+<li><strong>Scalability:</strong> threads can run in parellel on different processing cores, which takes advantage of muticores system</li>
+</ul>
+<h1 id="mechanism-of-thread-switching"><a class="markdownIt-Anchor" href="#mechanism-of-thread-switching"></a> Mechanism of Thread Switching</h1>
+<p>Switching the CPU from one thread to another belonging to the same process involves suspending the current thread, saving its <em>state</em> (e.g., registers, accumulator), and then restoring the state of the thread being switched to.</p>
+<p>The thread switch actually completes at the moment a new program counter is loaded into PC; at that point, the CPU is no longer executing the thread switching code, it is executing code associated with the new thread.</p>
+<p>A context switch between threads does the following:</p>
+<ol>
+<li><strong>Save all registers</strong> (general-perpose, special and CCs) in TCB (Thread Control Block).</li>
+<li>Then we will <strong>save PC</strong>. Instead of saving the current PC, we place the return address (found on the stack in the thread’s activation record) in the thread’s context block. When the thread is resumed later, the resuming address loaded into the PC will be the instruction immediately following the <code>call</code> instruction that invoked <code>Switch()</code> earlier.</li>
+<li>Once the current thread’s state has been saved, <strong>load new values into the registers</strong> from the TCB of the next thread. We know that in the perspective of CPU, a context of a process or thread is all about the registers and condition codes (and maybe cache, but not consider here). So when a new stack pointer loaded onto SP, it actually performs “stack switching”.</li>
+<li>So what is the exact point a context switch has taken place? That is, when the current PC is replaced by the saved PC found in the process table. Once the saved PC is loaded, <code>Switch()</code> is no longer executing; we are now executing instructions associated with the new thread, which should be the instruction immediately following the call to <code>Switch()</code>. <strong>As soon as the new PC is loaded, a context switch has taken place.</strong></li>
+</ol>
+<h1 id="multithreading-model"><a class="markdownIt-Anchor" href="#multithreading-model"></a> Multithreading Model</h1>
+<h2 id="user-level-thread-and-kernel-level-thread"><a class="markdownIt-Anchor" href="#user-level-thread-and-kernel-level-thread"></a> User Level thread and Kernel Level thread</h2>
+<p><strong>Support</strong> for threads may be provided eitherat the user level, for <strong>user threads</strong>, or by the kernel, for <strong>kernel threads</strong>. User threads are supported above the kernel and are managed without kernel support, whereas kernel threads are suported an managed directly by the operating system.</p>
+<p>There are two confusing terms, one is “<em>support</em>” and the other is “<em>user/kernel thread</em>”.</p>
+<p>To my understading, user level thread and kernel level thread are two abstract concepts. User threads are visible to user/programmer which means they can be manipulated by users. While kernel threads are visible to operating system, they are managed by kernel, and most importantly, they are the actual unit to be scheduled by kernel or to be executed by CPU.</p>
+<p>So in order to make a user thread to be executed, a relationship must exist between user threads and kernel threads, that is <strong>mapping</strong>. The following are the three common ways to establish such a relationship.</p>
+<h2 id="many-to-one-model"><a class="markdownIt-Anchor" href="#many-to-one-model"></a> Many-to-One Model</h2>
+<p>The many-to-one model maps many user threads to a single kernel thread. Thread management (creation, termination, scheduling, etc) is implemented by <em>thread library</em>, so kernel is unaware of these threads and it can only “see” one user thread at any time.</p>
+<p>This model is efficient since the management is all done in user level, without diving into kernel mode. However, if a thread calls a blocking system call (e.g. <code>sleep()</code>, <code>wait()</code> or I/O request), the entire process will block. Also, because only one thread can access the kernel at a time, it can’t make use of mutiple processors in muticores environment.<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/many-to-one.png" alt="many-to-one.png"></p>
+<h2 id="one-to-one-model"><a class="markdownIt-Anchor" href="#one-to-one-model"></a> One-to-One Model</h2>
+<p>The one-to-one model maps each user thread to a kernel thread. It not only provides more concurrency by allowing another thread to run when a thread makes a blocking system call, but also allows mutiple threads to run in parallel in muticores environment.</p>
+<p>The only drawback is that creating and manipulating a bunch of kernel threads bring a great overhead and can burden the performance of an application.<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/one-to-one.png" alt="one-to-one.png"></p>
+<h2 id="lightweight-process-lwp"><a class="markdownIt-Anchor" href="#lightweight-process-lwp"></a> Lightweight Process (LWP)</h2>
+<p><em>Copy from <a target="_blank" rel="noopener" href="https://cseweb.ucsd.edu">https://cseweb.ucsd.edu</a></em></p>
+<p>Kernel threads are great for kernel writers and user threads answer many of the needs of users, but they are not perfect. Consider these examples:</p>
+<ul>
+<li>On a multiprocessor system, only one thread within a process can execute at a time</li>
+<li>A process that consists of many threads, each of which may be able to execute at any time, will not get any more CPU time than a process containing only one thread</li>
+<li>If any thread within a process makes a system call, all threads within that process will be blocked because of the context switch.</li>
+<li>If any user thread blocks waiting for I/O or a resource, the entire process blocks. (Thread libraries usually replace blocking calls with non-blocking calls whenever possible to mitigate this.)</li>
+</ul>
+<p>To address these needs, we need to have a kernel supported user thread. That is to say, we need a facility for threads to share resources within a process, but we also need the ability of the kernel to preempt, schedule, and dispatch threads. This type of thread is called a <em>kernel supported user thread</em> or a <em>light-weight process (LWP)</em>. A light-weight process is in contrast with a <em>heavy-weight process</em> otherwise known as a process or task.</p>
+<p>Our model of the universe has gone from looking like this:<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/old.png" alt="old.png"><br>
+To looking like this:<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/new.png" alt="new.png"></p>
+<p>To the user-thread library, the LWP appears to be a virtual processor on which the application can schedule a user thread to run. Each LWP is attached to a kernel thread, and <strong>it is kernel threads that the operating system schedules to run on physical processors</strong> (Ch 5.).<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/lwp.png" alt="lwp.png"></p>
+<h2 id="many-to-many-model"><a class="markdownIt-Anchor" href="#many-to-many-model"></a> Many-to-Many Model</h2>
+<p>Based on LWPs, the many-to-many model mutiplexes many user-level threads to a smaller or equal number of kernel threads. Developers can create as many user threads as necessary, and the corresponding kernel threads can run in parallel on a mutiprocessor.<br>
+<img src="/2024/12/03/Operating-System-Concepts-Ch4/many-to-many.png" alt="many-to-many.png"></p>
+<h1 id="user-level-and-kernel-level-multithreading"><a class="markdownIt-Anchor" href="#user-level-and-kernel-level-multithreading"></a> User-level and Kernel-level Multithreading</h1>
+<p>The key difference between <strong>explicitly user-level thread libraries</strong> (e.g., <code>pthread</code> or <code>windows.h</code>) and <strong>implicitly kernel-level thread abstractions</strong> (e.g., thread pools, OpenMP, or GCD) lies in <strong>control granularity</strong> and <strong>abstraction level</strong>, which affects <strong>how threads are managed</strong> and <strong>who is responsible for managing them</strong>.</p>
+<h3 id="1-user-level-thread-libraries-explicit-control"><a class="markdownIt-Anchor" href="#1-user-level-thread-libraries-explicit-control"></a> 1. User-Level Thread Libraries (Explicit Control)</h3>
+<p>Examples: <code>pthread</code> (POSIX threads), <code>windows.h</code> (Windows threading API)</p>
+<h4 id="characteristics"><a class="markdownIt-Anchor" href="#characteristics"></a> Characteristics:</h4>
+<ul>
+<li><strong>Explicit Thread Management:</strong><br>
+The programmer directly creates, manages, and synchronizes threads using APIs like <code>pthread_create</code>, <code>pthread_join</code>, or <code>CreateThread</code>.</li>
+<li><strong>Fine-Grained Control:</strong><br>
+The library exposes lower-level primitives, allowing the programmer to:
+<ul>
+<li>Decide when and how to create threads.</li>
+<li>Explicitly synchronize threads with mutexes, condition variables, etc.</li>
+<li>Handle thread termination and resource cleanup.</li>
+</ul>
+</li>
+<li><strong>User-Space Scheduling:</strong><br>
+If implemented as purely user-level threads (like in the Many-to-One model), the kernel may not even be aware of these threads, and the thread library handles scheduling in user space. This provides lightweight thread management but can suffer from blocking issues.</li>
+</ul>
+<h3 id="2-kernel-level-thread-libraries-implicit-abstractions"><a class="markdownIt-Anchor" href="#2-kernel-level-thread-libraries-implicit-abstractions"></a> 2. Kernel-Level Thread Libraries (Implicit Abstractions)</h3>
+<p>Examples: Thread pools, OpenMP (<code>omp.h</code>), Grand Central Dispatch (GCD)</p>
+<h4 id="characteristics-2"><a class="markdownIt-Anchor" href="#characteristics-2"></a> Characteristics:</h4>
+<ul>
+<li><strong>Higher-Level Abstractions:</strong><br>
+These libraries or frameworks hide most of the low-level thread management details from the programmer. <u>Instead of directly managing threads, you typically submit <strong>task</strong> or use <strong>parallel constructs</strong>, and the system determines how threads are allocated</u>.</li>
+<li><strong>Kernel-Managed Threads:</strong><br>
+These abstractions often rely on kernel threads for execution, meaning the kernel scheduler handles thread creation, termination, and context switching.</li>
+<li><strong>Dynamic Resource Management:</strong><br>
+They dynamically adjust thread usage to match the available hardware resources (e.g., CPU cores) and workload. For example:
+<ul>
+<li><strong>Thread pools</strong> reuse threads to minimize thread creation and destruction overhead.</li>
+<li><strong>OpenMP</strong> dynamically distributes work across threads with constructs like <code>#pragma omp parallel for</code>.</li>
+<li><strong>GCD</strong> (on Apple platforms) uses queues to schedule tasks onto kernel threads efficiently.</li>
+</ul>
+</li>
+</ul>
+<h3 id="why-they-seem-the-same-to-programmers"><a class="markdownIt-Anchor" href="#why-they-seem-the-same-to-programmers"></a> Why They “Seem the Same” to Programmers</h3>
+<p>From a usability perspective, they may feel similar because:</p>
+<ol>
+<li>Both allow concurrent execution.</li>
+<li>The higher-level abstractions are designed to make concurrency <strong>easier</strong>, hiding the underlying complexity.</li>
+</ol>
+<p>However, the <strong>level of abstraction</strong> and <strong>degree of control</strong> are vastly different. If you’re using <code>pthread</code>, you’re <strong>explicitly</strong> in charge of the threads, while with something like OpenMP or GCD, you’re simply defining tasks, and the <strong>framework/library manages everything else</strong>.</p>
+<hr>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5440128/thread-context-switch-vs-process-context-switch">https://stackoverflow.com/questions/5440128/thread-context-switch-vs-process-context-switch</a></li>
+<li><a target="_blank" rel="noopener" href="https://users.cs.duke.edu/~narten/110/nachos/main/node13.html">https://users.cs.duke.edu/~narten/110/nachos/main/node13.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=M9HHWFp84f0">Why Are Threads Needed On Single Core Processors - Core Dumped</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads">https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads</a></li>
+<li><a target="_blank" rel="noopener" href="https://cseweb.ucsd.edu/classes/sp16/cse120-a/applications/ln/lecture4.html">https://cseweb.ucsd.edu/classes/sp16/cse120-a/applications/ln/lecture4.html</a></li>
+<li>ChatGPT-4o</li>
+<li><em>Operating System Concepts, 9th edition</em></li>
+</ul>
+</article><div class="tag_share"><div class="post_share"><div class="social-share" data-image="../../../../img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="../../../11/17/Operating-System-Concepts-Ch3/" title="Operating System Concepts: Process Concept"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Operating System Concepts: Process Concept</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="../../../../img/avatar.jpg" onerror="this.onerror=null;this.src='../../../../img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">蘋末风</div><div class="author-info__description">随缘更各种杂七杂八的东西</div></div><div class="card-info-data site-data is-center"><a href="../../../../archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="../../../../tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="../../../../categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#key-objectives"><span class="toc-number">1.</span> <span class="toc-text"> Key objectives</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#thread-concept"><span class="toc-number">2.</span> <span class="toc-text"> Thread Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#motivation"><span class="toc-number">2.1.</span> <span class="toc-text"> Motivation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#benefits"><span class="toc-number">2.2.</span> <span class="toc-text"> Benefits</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mechanism-of-thread-switching"><span class="toc-number">3.</span> <span class="toc-text"> Mechanism of Thread Switching</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#multithreading-model"><span class="toc-number">4.</span> <span class="toc-text"> Multithreading Model</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#user-level-thread-and-kernel-level-thread"><span class="toc-number">4.1.</span> <span class="toc-text"> User Level thread and Kernel Level thread</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#many-to-one-model"><span class="toc-number">4.2.</span> <span class="toc-text"> Many-to-One Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#one-to-one-model"><span class="toc-number">4.3.</span> <span class="toc-text"> One-to-One Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lightweight-process-lwp"><span class="toc-number">4.4.</span> <span class="toc-text"> Lightweight Process (LWP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#many-to-many-model"><span class="toc-number">4.5.</span> <span class="toc-text"> Many-to-Many Model</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#user-level-and-kernel-level-multithreading"><span class="toc-number">5.</span> <span class="toc-text"> User-level and Kernel-level Multithreading</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-user-level-thread-libraries-explicit-control"><span class="toc-number">5.0.1.</span> <span class="toc-text"> 1. User-Level Thread Libraries (Explicit Control)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#characteristics"><span class="toc-number">5.0.1.1.</span> <span class="toc-text"> Characteristics:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-kernel-level-thread-libraries-implicit-abstractions"><span class="toc-number">5.0.2.</span> <span class="toc-text"> 2. Kernel-Level Thread Libraries (Implicit Abstractions)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#characteristics-2"><span class="toc-number">5.0.2.1.</span> <span class="toc-text"> Characteristics:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#why-they-seem-the-same-to-programmers"><span class="toc-number">5.0.3.</span> <span class="toc-text"> Why They “Seem the Same” to Programmers</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="" title="Operating System Concepts: Multithreaded Programming">Operating System Concepts: Multithreaded Programming</a><time datetime="2024-12-03T09:12:32.577Z" title="发表于 2024-12-03 17:12:32">2024-12-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="../../../11/17/Operating-System-Concepts-Ch3/" title="Operating System Concepts: Process Concept">Operating System Concepts: Process Concept</a><time datetime="2024-11-17T08:13:46.470Z" title="发表于 2024-11-17 16:13:46">2024-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="../../../10/02/Git%E4%BA%8C%E5%91%A8%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="Git二周目学习">Git二周目学习</a><time datetime="2024-10-02T13:17:15.501Z" title="发表于 2024-10-02 21:17:15">2024-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="../../../09/15/CS144-Lab2/" title="Standford CS144 Lab 2">Standford CS144 Lab 2</a><time datetime="2024-09-15T08:59:30.128Z" title="发表于 2024-09-15 16:59:30">2024-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="../../../08/11/CS144-Lab1/" title="Standford CS144 Lab 1">Standford CS144 Lab 1</a><time datetime="2024-08-11T00:47:37.184Z" title="发表于 2024-08-11 08:47:37">2024-08-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="../../../../js/utils.js?v=4.13.0"></script><script src="../../../../js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div></div></body></html>
