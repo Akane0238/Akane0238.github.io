@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-01-15T10:08:39.306Z</updated>
+  <updated>2025-02-28T11:21:25.549Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Operating System Concepts: Process Scheduling</title>
+    <link href="http://example.com/2025/02/28/Operating-System-Concepts-Ch5/"/>
+    <id>http://example.com/2025/02/28/Operating-System-Concepts-Ch5/</id>
+    <published>2025-02-28T11:15:55.951Z</published>
+    <updated>2025-02-28T11:21:25.549Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Attenion: we use <em><strong>process scheduling</strong></em> when discussing general scheduling concepts.</p></blockquote><h1 id="key-objects"><a class="markdownIt-Anchor" href="#key-objects"></a> Key Objects</h1><ul><li>Introduce CPU-scheduling (object, method, criteria)</li><li>List some common CPU-scheduling algorithms</li></ul><blockquote><p>Q: Why we address <strong>CPU-scheduling</strong> instead of <strong>scheduling</strong> itself?<br>A: Scheduling of this kind is a fundamental operating-system function. Almost all computer resources are scheduled before use.</p></blockquote><h1 id="basic-scheduling-concepts"><a class="markdownIt-Anchor" href="#basic-scheduling-concepts"></a> Basic Scheduling Concepts</h1><h2 id="preemptive-and-nonpreemptive-scheduling"><a class="markdownIt-Anchor" href="#preemptive-and-nonpreemptive-scheduling"></a> Preemptive and Nonpreemptive Scheduling</h2><h3 id="1-preemptive-scheduling"><a class="markdownIt-Anchor" href="#1-preemptive-scheduling"></a> 1. Preemptive Scheduling</h3><ul><li><strong>Definition</strong>: In preemptive scheduling, the operating system can interrupt a running process before it completes, allowing another process to use the CPU. This ensures that no single process monopolizes the CPU for too long.</li></ul><h3 id="2-nonpreemptive-scheduling"><a class="markdownIt-Anchor" href="#2-nonpreemptive-scheduling"></a> 2. Nonpreemptive Scheduling</h3><ul><li><strong>Definition</strong>: In nonpreemptive scheduling, once a process starts executing, it cannot be interrupted until it voluntarily releases the CPU (e.g., by terminating or <strong>waiting for I/O</strong>).</li></ul><h2 id="components"><a class="markdownIt-Anchor" href="#components"></a> Components</h2><h3 id="1-cpu-scheduler"><a class="markdownIt-Anchor" href="#1-cpu-scheduler"></a> 1. CPU Scheduler</h3><p><strong>CPU-scheduler</strong>, or <strong>short-term scheduler</strong>, is responsible for selecting one of the processes in the ready queue and allocating the CPU to that process, when the CPU becomes idle.</p><h3 id="2-dispatcher"><a class="markdownIt-Anchor" href="#2-dispatcher"></a> 2. Dispatcher</h3><p>Different from CPU scheduler, <strong>dispatcher</strong> is the module that gives control of the CPU to the selected process. Its function involves the following:</p><ul><li>Switching contex</li><li>Switching to user mode</li><li>Jumping to the proper location in the user program to restart</li></ul><h1 id="scheduling-criteria"><a class="markdownIt-Anchor" href="#scheduling-criteria"></a> Scheduling Criteria</h1><ul><li>CPU utilization: keep CPU as busy as possible</li><li>Throughput: the number of processes completed per time unit</li><li>Turnaround time: the sum of the periods spent waiting, executing and doing I/O</li><li>Waiting time</li><li>Response time</li></ul><h1 id="scheduling-algorithms"><a class="markdownIt-Anchor" href="#scheduling-algorithms"></a> Scheduling Algorithms</h1><ul><li>First-Come, First-Served Scheduling (FCFS)</li><li>Shortest-Job-First Scheduling</li><li>Priority Scheduling</li><li>Round-Robin Scheduling (RR)</li><li>Multilevel Queue Scheduling</li><li>Multilevel Feedback Queue Scheduling (MLFQ)</li></ul><hr><p><strong>Reference:</strong></p><ul><li>DeepSeek</li><li><em>Operating System Concepts, 9th edition</em></li><li><a href="https://www.bilibili.com/video/BV18T1FYMEiJ/?spm_id_from=333.1387.homepage.video_card.click">冠以图灵奖之名的调度算法：MLFQ 多级反馈队</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Attenion: we use &lt;em&gt;&lt;strong&gt;process scheduling&lt;/strong&gt;&lt;/em&gt; when discussing general scheduling concepts.&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>2024-1学习思考点滴汇总</title>
