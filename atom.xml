@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-04-10T06:47:15.772Z</updated>
+  <updated>2025-04-16T01:46:17.425Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为什么应用程序时特定于操作系统的</title>
+    <link href="http://example.com/2025/04/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E7%89%B9%E5%AE%9A%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84/"/>
+    <id>http://example.com/2025/04/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E7%89%B9%E5%AE%9A%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84/</id>
+    <published>2025-04-15T13:55:02.487Z</published>
+    <updated>2025-04-16T01:46:17.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>看视频看到了一个很有意思的问题：<a href="https://www.youtube.com/watch?v=eP_P4KOjwhs">Why applications are operating-system specific?</a></p><h1 id="观点看法"><a class="markdownIt-Anchor" href="#观点看法"></a> 观点看法</h1><p>对于这个问题，我的能想到答案便是 syscalls 。尽管机器的架构可能是相同的（即应用程序被编译为同一指令集），但应用并非直接与硬件交互，它们之间存在了一个中间层——操作系统。应用在 user mode 下只能执行有限的计算指令，而为了使用 I/O 设备、内存、文件系统等软硬件资源，必须调用 OS 提供给用户的 API，即 system calls，将控制转移给 OS，CPU 切换为 kernel mode，执行写死的 syscall 内核代码并返回结果给应用。</p><p>不同操作系统提供的 syscalls 有很大的不同。以 Windows 和 Unix/Linux 的创建进程的系统调用为例：</p><ul><li>在 Win 的 API 下，进程调用<code>CreateProcess()</code>创建一个进程执行指定的可执行文件</li><li>Unix/Linux 下，进程调用<code>fork()</code>仅复制了进程本身，为了加载执行程序还需调用<code>exec()</code></li></ul><p>实现的不同导致 syscall 的行为不同，也就无法实现应用程序的跨平台了。所以同一段代码逻辑，在编程语言层面的编写就有很大不同了，编译为汇编代码那么就会有更大的不同！</p><hr><p>在总结视频内容的基础之上，详细补充在 <em>Operating System Concepts</em> 章节笔记中缺失的一些概念并在此之上延申出一些思考：</p><ul><li>系统调用 system calls<ul><li>Shell 的构建</li><li>x86 <code>syscall</code>指令：Hardware-based context switch v.s. Software-based context switch</li></ul></li><li>ABI (Application Binary Interface)</li></ul><hr><h1 id="1-系统调用-system-call"><a class="markdownIt-Anchor" href="#1-系统调用-system-call"></a> 1. 系统调用 System Call</h1><p>上面说了我对 syscall 的思考，实际上，就算不同操作系统对同一系统调用的接口与实现相同，但<strong>底层实现的细节</strong>依旧会导致应用无法跨平台运行。</p><h2 id="系统调用表-system-call-table"><a class="markdownIt-Anchor" href="#系统调用表-system-call-table"></a> 系统调用表 System Call Table</h2><p>首先补充上下文切换的一些知识点：<strong>Hardware-based context switch v.s. Software-based context switch</strong></p><p>抢占式调度依赖中断实现，其中时间片轮转（Round Robin）依赖时钟中断实现，CPU 响应中断会进行进程的上下文切换，保存当前进程的所有<strong>状态</strong>到 PCB 中，再从 PCB 加载新进程的<strong>状态</strong>。</p><p>system call 也会使 CPU 从用户态转换为内核态，为了执行在操作系统内核代码中写定的系统调用例程，CPU 同样需要进行上下文的切换，但这个过程只保留一些必要的寄存器值，因为本质上还是在执行这个进程。至少需要保存的寄存器有：</p><ul><li>Program Counter (<code>PC</code>) / <code>%rip</code></li><li>Stack Pointer (<code>%rsp</code>) 切换为内核栈</li><li>标志寄存器</li><li>syscall 传参所占用的寄存器</li></ul><hr><p>回到之前的问题，如果程序汇编代码中有如下的 syscall（x86 为例）：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov rax, 57  // set the system call number</span><br><span class="line">syscall      // transfer control</span><br></pre></td></tr></table></figure><ol><li>不同的操作系统可能读取不同的寄存器来获取系统调用序号，所以如果读取的是<code>%rbx</code>，那么直接系统就 crash 了。</li><li>就算是读取同一寄存器，但对于同一序号可能实现的是不同的 syscall。<br><img src="/2025/04/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E7%89%B9%E5%AE%9A%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84/win.png" alt="windows.png"><br><img src="/2025/04/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E7%89%B9%E5%AE%9A%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84/linux.png" alt="linux.png"></li></ol><h1 id="2-参数传递与-abi"><a class="markdownIt-Anchor" href="#2-参数传递与-abi"></a> 2. 参数传递与 ABI</h1><p>大部分系统调用都需要传递参数，那么将参数写到什么地方也会产生问题：<code>OS1</code>可能读取的是寄存器上的参数值，而<code>OS2</code>可能读取的是内存上的参数值。通过内存传递参数又分为通过栈或者一块特定的内存空间。这就是底层 ABI 之间的差异造成的不兼容。</p><hr><h2 id="application-binary-interface-abi"><a class="markdownIt-Anchor" href="#application-binary-interface-abi"></a> Application Binary Interface (ABI)</h2><p>类比 API 是我们如何在语言层面调用函数，ABI 则是在汇编/二进制码层面具体是如何调用的。</p><blockquote><p><strong>ABI = binary-level contract</strong> that defines how functions, data, and system calls are represented and interacted with at runtime.</p></blockquote><p>除了前述的参数传递的规定，ABI 还包括：</p><ul><li><strong>Register usage</strong>: registers are caller-saved vs callee-saved</li><li><strong>Binary format</strong>: Format of executable files (like ELF on Linux, PE on Windows)</li><li><strong>System call interface</strong>: How system calls are made (via <code>syscall</code>, <code>int 0x80</code>, etc.)</li><li><strong>Exception handling</strong>: How exceptions are represented and handled in binary</li></ul><p>具体举 x86-64 System V ABI (Linux) 为例：</p><ul><li>前六个参数的值设置在: <code>RDI, RSI, RDX, RCX, R8, R9</code></li><li>返回值设置: <code>RAX</code></li><li>在 <code>call</code>之前栈必须以 16 字节对齐</li><li>Caller-saved: <code>RAX, RCX, RDX, RSI, RDI, R8–R11</code></li><li>Callee-saved: <code>RBX, RBP, R12–R15</code></li></ul><hr><h1 id="3-可执行文件格式"><a class="markdownIt-Anchor" href="#3-可执行文件格式"></a> 3. 可执行文件格式</h1><p>不同操作系统的可执行文件格式不同，其中包含了描述该文件的 meta-data 和具体文件数据。</p><p>以 ELF 为例：<img src="/2025/04/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E7%89%B9%E5%AE%9A%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84/elf.png" alt="elf.png"><br>文件中的不同 section 具有不同的用途，<code>.debug</code>用于调试，<code>.symtab</code>用于链接，<code>.data</code>和<code>.bss</code>用于初始化/未初始化数据的读写</p><h1 id="4-运行时环境-runtime"><a class="markdownIt-Anchor" href="#4-运行时环境-runtime"></a> 4. 运行时环境 runtime</h1><p>Java 运行在 JVM 上，Python 代码通过解释器解释执行，JS 也会被浏览器的 Javascript 引擎解释执行，通过虚拟化可以很好地避免上述问题。但现代程序都是模块化的，如果特定模块所需要的环境在另一个操作系统上并没有提供，那么整个程序都无法运行。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;看视频看到了一个很有意思的问题：&lt;a href=&quot;https://www.youtube.com/watch?v=eP_P4KOjwhs&quot;&gt;Why applications are operating-system specific?&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;观点看</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Go协程与通道机制</title>
